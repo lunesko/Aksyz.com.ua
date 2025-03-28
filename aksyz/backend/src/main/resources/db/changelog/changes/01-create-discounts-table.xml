@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="01-create-discounts-table" author="developer">
+        <createTable tableName="discounts">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="old_price" type="decimal(10,2)"/>
+            <column name="new_price" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount_percent" type="int"/>
+            <column name="store_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="varchar(100)"/>
+            <column name="category" type="varchar(100)"/>
+            <column name="link" type="text"/>
+            <column name="image_url" type="text"/>
+            <column name="expires_at" type="timestamp"/>
+            <column name="created_at" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+        
+        <createIndex indexName="idx_discounts_category" tableName="discounts">
+            <column name="category"/>
+        </createIndex>
+        
+        <createIndex indexName="idx_discounts_city" tableName="discounts">
+            <column name="city"/>
+        </createIndex>
+        
+        <createIndex indexName="idx_discounts_store_name" tableName="discounts">
+            <column name="store_name"/>
+        </createIndex>
+        
+        <createIndex indexName="idx_discounts_link" tableName="discounts">
+            <column name="link"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

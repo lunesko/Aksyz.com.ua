@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: akcizua-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/akcizua
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-your_bot_token}
+      - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME:-your_bot_username}
+    networks:
+      - akcizua-network
+    volumes:
+      - ./backend:/app
+      - ~/.m2:/root/.m2
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: akcizua-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - akcizua-network
+    volumes:
+      - ./frontend:/app
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    container_name: akcizua-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=akcizua
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - akcizua-network
+
+  # PgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: akcizua-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@akcizua.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - akcizua-network
+
+networks:
+  akcizua-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

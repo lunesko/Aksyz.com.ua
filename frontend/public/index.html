@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="АкцизUA - лучшие скидки на алкоголь и сигареты в магазинах Украины: АТБ, Дастор, Класс, Alma, Рост, Rozetka, ABS, Fora.">
+    <meta name="keywords" content="скидки, акции, алкоголь, сигареты, Украина, АТБ, Дастор, Класс, Alma, Рост, Rozetka, ABS, Fora, пиво, виски, вино, водка">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="АкцизUA Team">
+    <meta property="og:title" content="АкцизUA - Скидки на алкоголь и сигареты в Украине">
+    <meta property="og:description" content="Найдите лучшие скидки на алкоголь и сигареты в магазинах Украины: АТБ, Дастор, Класс, Alma, Рост, Rozetka, ABS, Fora.">
+    <meta property="og:image" content="https://akcizua.com.ua/images/akcizua-logo.jpg"> <!-- Исправлено -->
+    <meta property="og:url" content="https://akcizua.com.ua">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0057b7">
+    <title>АкцизUA - Скидки на алкоголь и сигареты в магазинах Украины</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="image/png/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Шапка сайта -->
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="logo-container" aria-label="АкцизUA - Главная страница">
+                <svg class="logo-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+                    <!-- Фон с градиентом -->
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0057b7;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ffd700;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="800" height="400" fill="url(#logoGradient)"/>
+                    <!-- Основной текст -->
+                    <text x="50%" y="50%" font-family="Montserrat, sans-serif" font-size="120" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">АкцизUA</text>
+                    <!-- Волнистая линия под текстом -->
+                    <path d="M150 280 Q200 250, 250 280 T350 280 T450 280 T550 280" stroke="#ff4d6d" stroke-width="6" fill="none">
+                        <animate attributeName="d" values="M150 280 Q200 250, 250 280 T350 280 T450 280 T550 280;M150 280 Q200 290, 250 280 T350 280 T450 280 T550 280" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <!-- Маленькие акценты -->
+                    <circle cx="100" cy="100" r="20" fill="#ff4d6d">
+                        <animate attributeName="r" values="20;25;20" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="700" cy="300" r="15" fill="#ff4d6d">
+                        <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </a>
+            <div class="city-selector">
+                <select id="city-select" aria-label="Выберите город">
+                    <option value="" data-translate="select_city">Выберите город</option>
+                    <option value="kyiv">Киев</option>
+                    <option value="kharkiv">Харьков</option>
+                    <option value="odesa">Одесса</option>
+                    <option value="dnipro">Днепр</option>
+                    <option value="lviv">Львов</option>
+                    <option value="zaporizhzhia">Запорожье</option>
+                    <option value="vinnytsia">Винница</option>
+                    <option value="mykolaiv">Николаев</option>
+                    <option value="kherson">Херсон</option>
+                    <option value="cherkasy">Черкассы</option>
+                    <option value="chernivtsi">Черновцы</option>
+                    <option value="uzhhorod">Ужгород</option>
+                    <option value="zhytomyr">Житомир</option>
+                    <option value="sumy">Сумы</option>
+                    <option value="rivne">Ровно</option>
+                    <option value="ternopil">Тернополь</option>
+                    <option value="lutsk">Луцк</option>
+                    <option value="ivano_frankivsk">Ивано-Франковск</option>
+                    <option value="khmelnytskyi">Хмельницкий</option>
+                    <option value="poltava">Полтава</option>
+                    <option value="kropyvnytskyi">Кропивницкий</option>
+                    <option value="chernihiv">Чернигов</option>
+                </select>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#discounts" data-translate="nav_discounts">Скидки</a>
+                <a href="#stores" data-translate="nav_stores">Магазины</a>
+                <a href="#map" data-translate="nav_map">Карта</a>
+                <a href="#add" data-translate="nav_add">Добавить</a>
+                <a href="#gallery" data-translate="nav_gallery">Галерея</a>
+            </div>
+            <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<!-- Герой-секция -->
+<section class="hero">
+    <div class="container">
+        <h1 data-translate="hero_title">Лучшие скидки на алкоголь и сигареты</h1>
+        <p data-translate="hero_subtitle">Найдите выгодные предложения в вашем городе и делитесь находками!</p>
+        <div class="search-container">
+            <input type="text" class="search-input" data-translate="search_placeholder" placeholder="Поиск (например, 'пиво', 'виски', 'Marlboro')" aria-label="Поиск скидок">
+            <button type="button" class="search-icon" aria-label="Искать">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Список скидок -->
+<section class="discounts" id="discounts">
+    <div class="container">
+        <h2 class="section-title" data-translate="discounts_title">Последние скидки</h2>
+        <div class="discount-grid" id="discount-grid"></div>
+    </div>
+</section>
+
+<!-- Список акций магазинов -->
+<section class="stores" id="stores">
+    <div class="container">
+        <h2 class="section-title">Акции магазинов</h2>
+        <div class="store-selector">
+            <select id="store-filter" aria-label="Фильтр по магазину">
+                <option value="">Все магазины</option>
+                <option value="atb">АТБ</option>
+                <option value="dastor">Дастор</option>
+                <option value="klass">Класс</option>
+                <option value="alma">Alma</option>
+                <option value="rost">Рост</option>
+                <option value="rozetka">Rozetka</option>
+                <option value="abs">ABS</option>
+                <option value="fora">Fora</option>
+            </select>
+            <select id="store-city-filter" aria-label="Фильтр по городу">
+                <option value="">Все города</option>
+                <option value="kyiv">Киев</option>
+                <option value="kharkiv">Харьков</option>
+                <option value="odesa">Одесса</option>
+                <option value="dnipro">Днепр</option>
+                <option value="lviv">Львов</option>
+                <option value="zaporizhzhia">Запорожье</option>
+                <option value="vinnytsia">Винница</option>
+                <option value="mykolaiv">Николаев</option>
+                <option value="kherson">Херсон</option>
+                <option value="cherkasy">Черкассы</option>
+                <option value="chernivtsi">Черновцы</option>
+                <option value="uzhhorod">Ужгород</option>
+                <option value="zhytomyr">Житомир</option>
+                <option value="sumy">Сумы</option>
+                <option value="rivne">Ровно</option>
+                <option value="ternopil">Тернополь</option>
+                <option value="lutsk">Луцк</option>
+                <option value="ivano_frankivsk">Ивано-Франковск</option>
+                <option value="khmelnytskyi">Хмельницкий</option>
+                <option value="poltava">Полтава</option>
+                <option value="kropyvnytskyi">Кропивницкий</option>
+                <option value="chernihiv">Чернигов</option>
+            </select>
+            <select id="product-type-filter" aria-label="Фильтр по типу продукта">
+                <option value="">Все типы</option>
+                <option value="whiskey">Виски</option>
+                <option value="beer">Пиво</option>
+                <option value="wine">Вино</option>
+                <option value="vodka">Водка</option>
+                <option value="cigarettes">Сигареты</option>
+            </select>
+        </div>
+        <div class="store-grid" id="store-grid"></div>
+    </div>
+</section>
+
+<!-- Популярные товары -->
+<section class="popular-products" id="popular-products">
+    <div class="container">
+        <h2 class="section-title">Популярные товары</h2>
+        <div class="popular-products-grid" id="popular-products-grid"></div>
+    </div>
+</section>
+
+<!-- Карта -->
+<section class="map-section" id="map">
+    <div class="container">
+        <h2 class="section-title" data-translate="map_title">Скидки на карте</h2>
+        <div class="map-container" id="map-container"></div>
+    </div>
+</section>
+
+<!-- Добавление скидки -->
+<section class="add-discount" id="add">
+    <div class="container">
+        <h2 class="section-title" data-translate="add_title">Добавить скидку</h2>
+        <div class="add-discount-container">
+            <form class="add-form" id="add-form">
+                <div class="form-row">
+                    <div class="form-group-minimal">
+                        <select id="discount-type" name="type" required>
+                            <option value="" data-translate="select_type">Тип</option>
+                            <option value="whiskey" data-translate="whiskey">Виски</option>
+                            <option value="beer" data-translate="beer">Пиво</option>
+                            <option value="wine" data-translate="wine">Вино</option>
+                            <option value="vodka" data-translate="vodka">Водка</option>
+                            <option value="cigarettes" data-translate="cigarettes">Сигареты</option>
+                        </select>
+                    </div>
+                    <div class="form-group-minimal">
+                        <input type="text" id="product-brand" name="brand" placeholder="Бренд" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group-minimal">
+                        <select id="discount-city" name="city" required>
+                            <option value="">Город</option>
+                            <option value="kyiv">Киев</option>
+                            <option value="kharkiv">Харьков</option>
+                            <option value="odesa">Одесса</option>
+                            <option value="dnipro">Днепр</option>
+                            <option value="lviv">Львов</option>
+                            <option value="zaporizhzhia">Запорожье</option>
+                            <option value="vinnytsia">Винница</option>
+                            <option value="mykolaiv">Николаев</option>
+                            <option value="kherson">Херсон</option>
+                            <option value="cherkasy">Черкассы</option>
+                            <option value="chernivtsi">Черновцы</option>
+                            <option value="uzhhorod">Ужгород</option>
+                            <option value="zhytomyr">Житомир</option>
+                            <option value="sumy">Сумы</option>
+                            <option value="rivne">Ровно</option>
+                            <option value="ternopil">Тернополь</option>
+                            <option value="lutsk">Луцк</option>
+                            <option value="ivano_frankivsk">Ивано-Франковск</option>
+                            <option value="khmelnytskyi">Хмельницкий</option>
+                            <option value="poltava">Полтава</option>
+                            <option value="kropyvnytskyi">Кропивницкий</option>
+                            <option value="chernihiv">Чернигов</option>
+                        </select>
+                    </div>
+                    <div class="form-group-minimal">
+                        <input type="date" id="discount-end-date" name="endDate" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group-minimal">
+                        <input type="number" id="discount-price" name="price" placeholder="Цена (грн)" step="0.01" required>
+                    </div>
+                    <div class="form-group-minimal">
+                        <input type="number" id="discount-amount" name="discountAmount" placeholder="Скидка (%)" step="0.1" required>
+                    </div>
+                </div>
+                <div class="form-group-minimal">
+                    <textarea id="discount-description" name="description" placeholder="Описание акции" required></textarea>
+                </div>
+                <div class="form-group-minimal upload-group">
+                    <input type="file" id="discount-photos" name="photos" multiple accept="image/*" class="file-input">
+                    <label for="discount-photos" class="file-label" data-translate="upload"><i class="fas fa-upload"></i> Фото</label>
+                </div>
+                <button type="submit" class="btn btn-submit" data-translate="add_button">Добавить</button>
+            </form>
+            <div class="telegram-subscription-card">
+                <h3>Подписка на скидки</h3>
+                <p>Получайте лучшие акции прямо в Telegram!</p>
+                <div class="subscription-form">
+                    <input type="text" id="telegram-id" placeholder="Ваш Telegram ID">
+                    <button id="subscribe-btn" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Подписаться</button>
+                </div>
+                <div class="subscription-benefits">
+                    <span><i class="fas fa-check"></i> Новые скидки</span>
+                    <span><i class="fas fa-check"></i> Эксклюзивные акции</span>
+                    <span><i class="fas fa-check"></i> Мгновенные уведомления</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Галерея -->
+<section class="gallery-section" id="gallery">
+    <div class="container">
+        <h2 class="section-title" data-translate="gallery_title">Галерея скидок</h2>
+        <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+</section>
+
+<!-- Модальные окна -->
+<div class="modal" id="edit-modal">
+    <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Закрыть"><i class="fas fa-times"></i></button>
+        <h3>Редактировать скидку</h3>
+        <form id="edit-form" class="add-form">
+            <div class="form-group-minimal">
+                <select id="edit-type" name="type" required>
+                    <option value="" data-translate="select_type">Тип</option>
+                    <option value="whiskey" data-translate="whiskey">Виски</option>
+                    <option value="beer" data-translate="beer">Пиво</option>
+                    <option value="wine" data-translate="wine">Вино</option>
+                    <option value="vodka" data-translate="vodka">Водка</option>
+                    <option value="cigarettes" data-translate="cigarettes">Сигареты</option>
+                </select>
+            </div>
+            <div class="form-group-minimal">
+                <input type="text" id="edit-brand" name="brand" required>
+            </div>
+            <div class="form-group-minimal">
+                <select id="edit-city" name="city" required>
+                    <option value="">Город</option>
+                    <option value="kyiv">Киев</option>
+                    <option value="kharkiv">Харьков</option>
+                    <option value="odesa">Одесса</option>
+                    <option value="dnipro">Днепр</option>
+                    <option value="lviv">Львов</option>
+                    <option value="zaporizhzhia">Запорожье</option>
+                    <option value="vinnytsia">Винница</option>
+                    <option value="mykolaiv">Николаев</option>
+                    <option value="kherson">Херсон</option>
+                    <option value="cherkasy">Черкассы</option>
+                    <option value="chernivtsi">Черновцы</option>
+                    <option value="uzhhorod">Ужгород</option>
+                    <option value="zhytomyr">Житомир</option>
+                    <option value="sumy">Сумы</option>
+                    <option value="rivne">Ровно</option>
+                    <option value="ternopil">Тернополь</option>
+                    <option value="lutsk">Луцк</option>
+                    <option value="ivano_frankivsk">Ивано-Франковск</option>
+                    <option value="khmelnytskyi">Хмельницкий</option>
+                    <option value="poltava">Полтава</option>
+                    <option value="kropyvnytskyi">Кропивницкий</option>
+                    <option value="chernihiv">Чернигов</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group-minimal">
+                    <input type="number" id="edit-price" name="price" placeholder="Цена (грн)" step="0.01" required>
+                </div>
+                <div class="form-group-minimal">
+                    <input type="number" id="edit-discount-amount" name="discountAmount" placeholder="Скидка (%)" step="0.1" required>
+                </div>
+            </div>
+            <div class="form-group-minimal">
+                <textarea id="edit-description" name="description" required></textarea>
+            </div>
+            <div class="form-group-minimal">
+                <input type="date" id="edit-end-date" name="endDate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="gallery-modal">
+    <div class="modal-content" id="gallery-modal-content">
+        <button type="button" class="modal-close" aria-label="Закрыть"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<!-- Подвал -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <svg class="logo-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+                    <!-- Адаптированный логотип для подвала -->
+                    <rect width="800" height="400" fill="#0057b7"/>
+                    <rect y="200" width="800" height="200" fill="#ffd700"/>
+                    <rect x="0" y="0" width="30" height="400" fill="#ff4d6d">
+                        <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+                    </rect>
+                    <g>
+                        <text x="100" y="200" font-family="Arial, sans-serif" font-size="110" font-weight="bold" fill="#ffffff">Акциз</text>
+                        <text x="410" y="200" font-family="Arial, sans-serif" font-size="110" font-weight="bold" fill="#ff4d6d">.com.ua</text>
+                    </g>
+                    <line x1="100" y1="290" x2="450" y2="290" stroke="#ff4d6d" stroke-width="6" stroke-linecap="round">
+                        <animate attributeName="stroke-opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="100" y1="320" x2="350" y2="320" stroke="#ff4d6d" stroke-width="6" stroke-linecap="round">
+                        <animate attributeName="stroke-opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                    </line>
+                    <circle cx="750" cy="230" r="120" fill="#ff4d6d" opacity="0.4">
+                        <animate attributeName="cy" values="230;210;230" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="800" cy="380" r="30" fill="#ff4d6d" opacity="0.7">
+                        <animate attributeName="cx" values="800;780;800" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <rect x="700" y="100" width="25" height="25" fill="#ff4d6d">
+                        <animateTransform attributeName="transform" type="rotate" from="0 712.5 112.5" to="360 712.5 112.5" dur="6s" repeatCount="indefinite"/>
+                    </rect>
+                    <circle cx="790" cy="120" r="5" fill="#ffffff">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="820" cy="140" r="2" fill="#ffffff">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                    </circle>
+                    <circle cx="710" cy="190" r="3" fill="#ffffff">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="5s" repeatCount="indefinite" begin="1s"/>
+                    </circle>
+                    <text x="100" y="370" font-family="Arial, sans-serif" font-size="30" letter-spacing="1" fill="#ffffff">
+                        <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite"/>
+                        ЛУЧШИЕ ЦЕНЫ НА АЛКОГОЛЬ И СИГАРЕТЫ
+                    </text>
+                </svg>
+            </div>
+            <div class="footer-nav">
+                <a href="#discounts">Скидки</a>
+                <a href="#stores">Магазины</a>
+                <a href="#map">Карта</a>
+                <a href="#add">Добавить</a>
+                <a href="#gallery">Галерея</a>
+            </div>
+            <p class="footer-desc">Сервис для поиска скидок по всей Украине.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Viber"><i class="fab fa-viber"></i></a>
+            </div>
+        </div>
+        <div class="copyright">© <span id="current-year">2025</span> АкцизUA.</div>
+    </div>
+</footer>
+
+<!-- Кнопки управления -->
+<button type="button" id="notification-settings-btn" class="notification-settings-btn" aria-label="Настройки">
+    <i class="fas fa-cog"></i>
+</button>
+<button type="button" id="back-to-top" class="back-to-top" aria-label="Наверх">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Скрипты -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/app.js"></script>
+<script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('back-to-top');
+            btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

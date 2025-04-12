@@ -12,9 +12,9 @@ services:
     depends_on:
       - postgres
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/akcizua
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/aksyz
       - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-your_bot_token}
       - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME:-your_bot_username}
@@ -46,7 +46,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=akcizua
+      - POSTGRES_DB=aksyz
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="2" author="marty">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="telegram_subscribers"/>
+            </not>
+        </preConditions>
+        <createTable tableName="telegram_subscribers">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="chat_id" type="VARCHAR(100)">
+                <constraints unique="true"/>
+            </column>
+            <column name="subscribed" type="BOOLEAN" defaultValueBoolean="true"/>
+            <column name="city" type="VARCHAR(100)"/>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="3" author="marty">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="push_subscriptions"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="push_subscriptions">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="endpoint" type="TEXT"/>
+            <column name="p256dh" type="TEXT"/>
+            <column name="auth" type="TEXT"/>
+            <column name="city" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

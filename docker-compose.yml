@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Backend service
   backend:
     build:
       context: ./backend
@@ -21,10 +20,8 @@ services:
     networks:
       - akcizua-network
     volumes:
-      - ./backend:/app
-      - ~/.m2:/root/.m2
+      - ~/.m2:/root/.m2  # кэш Maven, оставить по желанию
 
-  # Frontend service
   frontend:
     build:
       context: ./frontend
@@ -39,7 +36,6 @@ services:
     volumes:
       - ./frontend:/app
 
-  # PostgreSQL database
   postgres:
     image: postgres:15-alpine
     container_name: akcizua-postgres
@@ -48,13 +44,12 @@ services:
     environment:
       - POSTGRES_DB=aksyz
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=password
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - akcizua-network
 
-  # PgAdmin for database management (optional)
   pgadmin:
     image: dpage/pgadmin4
     container_name: akcizua-pgadmin

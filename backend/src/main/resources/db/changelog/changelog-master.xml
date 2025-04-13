@@ -8,4 +8,9 @@
 
     <include file="liquibase/discounts-table.xml" relativeToChangelogFile="true"/>
     <include file="liquibase/telegram-table.xml" relativeToChangelogFile="true"/>
+    <include file="liquibase/004-add-created-at-to-push-subscriptions.xml" relativeToChangelogFile="true"/>
+    <include file="liquibase/005-add-user-agent-to-push-subscriptions.xml" relativeToChangelogFile="true"/>
+    <include file="liquibase/006-add-active-to-telegram-subscribers.xml" relativeToChangelogFile="true"/>
+    <include file="liquibase/007-update-telegram-subscribers-schema.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

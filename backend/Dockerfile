@@ -1,27 +1,11 @@
-FROM maven:3.9-eclipse-temurin-17-alpine AS build
-
+# ==== Сборка jar ====
+FROM maven:3.9.3-eclipse-temurin-17 AS builder
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy pom.xml first for better layer caching
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy source code
-COPY src ./src
-
-# Build the application
-RUN mvn package -DskipTests
-
-# Second stage: minimal runtime
-FROM eclipse-temurin:17-jre-alpine
-
+# ==== Финальный контейнер ====
+FROM openjdk:17
 WORKDIR /app
-
-# Copy the built JAR file
-COPY --from=build /app/target/*.jar app.jar
-
-# Expose the application port
-EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=builder /app/target/akcizua-0.0.1-SNAPSHOT.jar akcizua.jar
+ENTRYPOINT ["java", "-jar", "akcizua.jar"]

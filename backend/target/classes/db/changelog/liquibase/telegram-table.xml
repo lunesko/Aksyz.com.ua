@@ -15,7 +15,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="chat_id" type="VARCHAR(100)">
+            <column name="chat_id" type="BIGINT">
                 <constraints unique="true"/>
             </column>
             <column name="subscribed" type="BOOLEAN" defaultValueBoolean="true"/>

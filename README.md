@@ -45,6 +45,9 @@ cd akcizua
 
 # Запуск проекта через Docker Compose
 docker-compose up --build
+
+
+
 ```
 
 После запуска:

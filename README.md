@@ -46,10 +46,7 @@ cd akcizua
 # Запуск проекта через Docker Compose
 docker-compose up --build
 
-# Закоммить и запушь изменения
-git add .
-git commit -m "текст коммита"
-git push origin main
+
 
 ```
 
